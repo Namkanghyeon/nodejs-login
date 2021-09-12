@@ -13,6 +13,9 @@ app.set("view engine", "ejs");
 
 app.use(express.static(`${__dirname}/src/public`));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/", home); // use -> 미들웨어를 등록해주는 메소드
 
 module.exports = app;
