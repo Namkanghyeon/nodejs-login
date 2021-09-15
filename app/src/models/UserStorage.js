@@ -26,8 +26,12 @@ class UserStorage {
             newUser[info] = users[info][idx];
             return newUser;
         }, {});
-
         return userInfo;
+    }
+
+    static save(userInfo) {
+        const users = this.#users;
+        //데이터 추가
     }
 }
 

@@ -1,18 +1,29 @@
 "use strict";
 
 const id = document.querySelector("#id");
+const name = document.querySelector("#name");
 const passwd = document.querySelector("#passwd");
-const loginBtn = document.querySelector("#button");
+const confirmPasswd = document.querySelector("#confirm-passwd");
+const registerBtn = document.querySelector("#button");
 
-loginBtn.addEventListener("click", login);
+registerBtn.addEventListener("click", register);
 
-function login() {
+function register() {
+    if (!id.value) {
+        return alert("아이디를 입력해주세요.");
+    }
+
+    if (passwd != confirmPasswd) {
+        return alert("비밀번호가 일치하지 않습니다.");
+    }
+
     const req = {
         id: id.value,
+        name: name.value,
         passwd: passwd.value,
     };
 
-    fetch("/login", {
+    fetch("/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -22,7 +33,7 @@ function login() {
         .then((res) => res.json())
         .then((res) => {
             if (res.success == true) {
-                location.href = "/";
+                location.href = "/login";
             } else {
                 alert(res.msg);
             }
