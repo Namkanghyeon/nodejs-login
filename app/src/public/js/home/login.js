@@ -7,27 +7,27 @@ const loginBtn = document.querySelector("button");
 loginBtn.addEventListener("click", login);
 
 function login() {
-  const req = {
-    id: id.value,
-    passwd: passwd.value,
-  };
+    const req = {
+        id: id.value,
+        passwd: passwd.value,
+    };
 
-  fetch("/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(req),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.success == true) {
-        location.href = "/";
-      } else {
-        alert(res.msg);
-      }
+    fetch("/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(req),
     })
-    .catch((err) => {
-      console.error("error error");
-    });
+        .then((res) => res.json())
+        .then((res) => {
+            if (res.success == true) {
+                location.href = "/";
+            } else {
+                alert(res.msg);
+            }
+        })
+        .catch((err) => {
+            console.error("my error");
+        });
 }

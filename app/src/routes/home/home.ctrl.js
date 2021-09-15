@@ -1,40 +1,27 @@
 "use strict";
 
-const UserStorage = require("../../models/UserStroage");
+const User = require("../../models/User");
 
 const output = {
-  home: (req, res) => {
-    res.render("home/index");
-  },
+    home: (req, res) => {
+        res.render("home/index");
+    },
 
-  login: (req, res) => {
-    res.render("home/login");
-  },
+    login: (req, res) => {
+        res.render("home/login");
+    },
 };
 
 const process = {
-  login: (req, res) => {
-    const id = req.body.id;
-    const passwd = req.body.passwd;
-
-    const users = UserStorage.getUsers("id", "passwd");
-    console.log(UserStorage.getUsers("id", "passwd"));
-
-    const response = {};
-    if (users.id.includes(id)) {
-      const idx = users.id.indexOf(id);
-      if (users.passwd[idx] == passwd) {
-        response.success = true;
+    login: (req, res) => {
+        console.log("controller: ", req.body);
+        const user = new User(req.body);
+        const response = user.login();
         return res.json(response);
-      }
-    }
-    response.success = false;
-    response.msg = "login failed";
-    return res.json(response);
-  },
+    },
 };
 
 module.exports = {
-  output,
-  process,
+    output,
+    process,
 };
