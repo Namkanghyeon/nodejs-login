@@ -24,10 +24,10 @@ const process = {
         return res.json(response);
     },
 
-    register: (req, res) => {
+    register: async (req, res) => {
         console.log("register controller input: ", req.body);
         const user = new User(req.body);
-        const response = user.register();
+        const response = await user.register();
         return res.json(response);
     },
 };
